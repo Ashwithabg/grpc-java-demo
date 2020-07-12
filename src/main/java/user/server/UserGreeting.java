@@ -1,11 +1,11 @@
-package user;
+package user.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 
-public class GreetingServer {
+public class UserGreeting {
     public static void main(String[] args) throws IOException, InterruptedException {
         Server server = ServerBuilder.forPort(50051).build();
 

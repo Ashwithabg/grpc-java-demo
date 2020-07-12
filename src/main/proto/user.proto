@@ -1,8 +1,7 @@
 syntax = "proto3";
 
 package user;
-
-option java_package = "com.proto.user";
+option java_package = "com.proto.user_greeting";
 option java_multiple_files = true;
 
 message UserEvent {
