@@ -4,7 +4,7 @@ import com.proto.user_greeting.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class Greeting {
+public class GreetingClient {
     public static void main(String[] args) {
         System.out.println("gRPC client");
         ManagedChannel managedChannel = ManagedChannelBuilder

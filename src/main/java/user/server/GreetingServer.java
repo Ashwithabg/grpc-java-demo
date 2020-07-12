@@ -5,7 +5,7 @@ import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 
-public class Greeting {
+public class GreetingServer {
     public static void main(String[] args) throws IOException, InterruptedException {
         Server server = ServerBuilder
                 .forPort(50051)
