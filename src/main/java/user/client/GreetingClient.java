@@ -6,16 +6,20 @@ import com.proto.greet.GreetServiceGrpc;
 import com.proto.greet.Greeting;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GreetingClient {
+    private static final Logger logger = LoggerFactory.getLogger(GreetingClient.class);
+
     public static void main(String[] args) {
-        System.out.println("gRPC client");
+        logger.info("gRPC client");
         ManagedChannel managedChannel = ManagedChannelBuilder
                 .forAddress("localhost", 50051)
                 .usePlaintext()
                 .build();
 
-        System.out.println("creating greet stub");
+        logger.info("creating greet stub");
         GreetServiceGrpc.GreetServiceBlockingStub syncClient = GreetServiceGrpc.newBlockingStub(managedChannel);
 
         Greeting greeting = Greeting.newBuilder()
@@ -27,9 +31,9 @@ public class GreetingClient {
                 .build();
         GreetResponse greetResponse = syncClient.greet(greetRequest);
 
-        System.out.println(greetResponse.getResult());
+        logger.info(greetResponse.getResult());
 
-        System.out.println("shutting down client");
+        logger.info("shutting down client");
         managedChannel.shutdown();
     }
 }

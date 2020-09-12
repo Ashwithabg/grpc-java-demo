@@ -5,7 +5,12 @@ import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class GreetingServer {
+    private static final Logger logger = LoggerFactory.getLogger(GreetingServer.class);
+
     public static void main(String[] args) throws IOException, InterruptedException {
         Server server = ServerBuilder
                 .forPort(50051)
@@ -13,13 +18,13 @@ public class GreetingServer {
                 .build();
 
         server.start();
-        System.out.println("server started");
+        logger.info("server started");
 
         server.awaitTermination();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("recieved shutdown request");
+            logger.info("recieved shutdown request");
             server.shutdown();
-            System.out.println("server has shutdown");
+            logger.info("server has shutdown");
         }));
 
     }
