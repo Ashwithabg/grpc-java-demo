@@ -9,6 +9,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 protobuf {
@@ -32,6 +33,7 @@ dependencies {
     implementation 'io.grpc:grpc-protobuf:1.30.2'
     implementation 'io.grpc:grpc-stub:1.30.2'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+    implementation 'com.gojek:jfigaro:1.2.2'
 
     implementation 'org.slf4j:slf4j-api:1.7.24'
     implementation 'org.slf4j:jul-to-slf4j:1.7.24'
