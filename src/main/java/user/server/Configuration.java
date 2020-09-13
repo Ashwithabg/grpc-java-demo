@@ -11,8 +11,8 @@ import static java.util.Arrays.asList;
 public class Configuration {
     public static ApplicationConfiguration get() {
         Set<String> requiredConfig = new HashSet<>(asList(
-                "SERVER_HOST",
-                "SERVER_PORT",
+                "SERVICE_HOST",
+                "SERVICE_PORT",
                 "CONSUL_DISCOVERY_ENABLED",
                 "CONSUL_HOST",
                 "CONSUL_PORT"

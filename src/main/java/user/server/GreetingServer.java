@@ -13,8 +13,10 @@ public class GreetingServer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         ApplicationConfiguration config = Configuration.get();
+        ConsulDiscoveryClient consulDiscoveryClient = new ConsulDiscoveryClient(config);
+        consulDiscoveryClient.register();
         Server server = ServerBuilder
-                .forPort(config.getValueAsInt("SERVER_PORT"))
+                .forPort(config.getValueAsInt("SERVICE_PORT"))
                 .addService(new GreetServiceImplementation())
                 .build();
 
@@ -23,10 +25,10 @@ public class GreetingServer {
 
         server.awaitTermination();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            consulDiscoveryClient.deregister();
             logger.info("Received shutdown request");
             server.shutdown();
             logger.info("Server has shutdown");
         }));
-
     }
 }
