@@ -11,20 +11,24 @@ import org.slf4j.LoggerFactory;
 
 public class GreetingClient {
     private static final Logger logger = LoggerFactory.getLogger(GreetingClient.class);
+    public static final String SERVER_HOST = "localhost";
+    public static final int SERVER_PORT = 50051;
+    public static final String FIRST_NAME = "Ash";
+    public static final String LAST_NAME = "B G";
 
     public static void main(String[] args) {
-        logger.info("gRPC client");
+        logger.info("Starting gRPC client");
         ManagedChannel managedChannel = ManagedChannelBuilder
-                .forAddress("localhost", 50051)
+                .forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext()
                 .build();
 
-        logger.info("creating greet stub");
+        logger.info("Creating greet stub");
         GreetServiceGrpc.GreetServiceBlockingStub syncClient = GreetServiceGrpc.newBlockingStub(managedChannel);
 
         Greeting greeting = Greeting.newBuilder()
-                .setFirstName("Ash")
-                .setLastName("B G")
+                .setFirstName(FIRST_NAME)
+                .setLastName(LAST_NAME)
                 .build();
         GreetRequest greetRequest = GreetRequest.newBuilder()
                 .setGreeting(greeting)
@@ -33,7 +37,7 @@ public class GreetingClient {
 
         logger.info(greetResponse.getResult());
 
-        logger.info("shutting down client");
+        logger.info("Shutting down client");
         managedChannel.shutdown();
     }
 }
