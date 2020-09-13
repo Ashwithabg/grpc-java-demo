@@ -9,12 +9,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.gojek.Figaro;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.Arrays.asList;
 
 public class GreetingClient {
     private static final Logger logger = LoggerFactory.getLogger(GreetingClient.class);
@@ -23,8 +17,7 @@ public class GreetingClient {
 
     public static void main(String[] args) {
         logger.info("Starting gRPC client");
-        Set<String> requiredConfig = new HashSet<>(asList("SERVER_HOST", "SERVER_PORT"));
-        ApplicationConfiguration config = Figaro.configure(requiredConfig);
+        ApplicationConfiguration config = Configuration.get();
 
         ManagedChannel managedChannel = ManagedChannelBuilder
                 .forAddress(config.getValueAsString("SERVER_HOST"), config.getValueAsInt("SERVER_PORT"))
