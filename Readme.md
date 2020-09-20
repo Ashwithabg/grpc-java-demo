@@ -1,3 +1,12 @@
-GRPC java demo
+*GRPC java demo*
+implement GRPC call in java with consul discovery.
 
-- implement GRPC call in java
+build
+```
+    ./gradlew clean build
+```
+
+run
+```
+    ./gradlew run
+```
