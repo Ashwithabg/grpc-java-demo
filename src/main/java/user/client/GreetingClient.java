@@ -6,9 +6,10 @@ import com.proto.greet.GreetResponse;
 import com.proto.greet.GreetServiceGrpc;
 import com.proto.greet.Greeting;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import user.Configuration;
+import user.service_discovery.ConsulDiscoveryClient;
 
 public class GreetingClient {
     private static final Logger logger = LoggerFactory.getLogger(GreetingClient.class);
@@ -18,11 +19,8 @@ public class GreetingClient {
     public static void main(String[] args) {
         logger.info("Starting gRPC client");
         ApplicationConfiguration config = Configuration.get();
-
-        ManagedChannel managedChannel = ManagedChannelBuilder
-                .forAddress(config.getValueAsString("SERVER_HOST"), config.getValueAsInt("SERVER_PORT"))
-                .usePlaintext()
-                .build();
+        ConsulDiscoveryClient consulDiscoveryClient = new ConsulDiscoveryClient(config);
+        ManagedChannel managedChannel = consulDiscoveryClient.getHealthyNodes(config.getValueAsString("SERVICE_NAME"));
 
         logger.info("Creating greet stub");
         GreetServiceGrpc.GreetServiceBlockingStub syncClient = GreetServiceGrpc.newBlockingStub(managedChannel);

@@ -1,4 +1,4 @@
-package user.client;
+package user;
 
 import com.gojek.ApplicationConfiguration;
 import com.gojek.Figaro;
