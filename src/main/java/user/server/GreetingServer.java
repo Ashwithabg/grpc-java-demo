@@ -20,6 +20,7 @@ public class GreetingServer {
         Server server = ServerBuilder
                 .forPort(config.getValueAsInt("SERVICE_PORT"))
                 .addService(new GreetServiceImplementation())
+                .addService(new HealthCheckImplementation())
                 .build();
 
         server.start();
